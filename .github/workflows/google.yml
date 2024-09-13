@@ -46,10 +46,13 @@ jobs:
             stock_service:
               - 'services/stock_service/**'
 
+      - name: List files
+        if: steps.filter.outputs.stock_service == 'true'
+        run: ls -R
+
       - name: Build image
         if: steps.filter.outputs.stock_service == 'true'
         run: docker build . --file services/stock_service/ --tag ${{ env.LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/stock_service:latest
-        working-directory: ../../
 
       - name: Push image
         run: docker push ${{ env.LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/stock_service:latest
