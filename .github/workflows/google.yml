@@ -48,8 +48,8 @@ jobs:
 
       - name: Build image
         if: steps.filter.outputs.stock_service == 'true'
-        run: docker build . --file services/stock_service/ --tag ${{ LOCATION }}-docker.pkg.dev/${{ PROJECT_ID }}/${{ REPOSITORY }}/stock_service:latest
+        run: docker build . --file services/stock_service/ --tag ${{ env.LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/stock_service:latest
         working-directory: ../../
 
       - name: Push image
-        run: docker push ${{ LOCATION }}-docker.pkg.dev/${{ PROJECT_ID }}/${{ REPOSITORY }}/stock_service:latest
+        run: docker push ${{ env.LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/stock_service:latest
