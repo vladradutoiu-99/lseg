@@ -1,0 +1,55 @@
+name: 'Build and Deploy to GKE'
+
+on:
+  push:
+    branches:
+      - '"master"'
+
+env:
+  PROJECT_ID: 'spiritual-oxide-435516-u4'
+  LOCATION: 'europe-west3'
+  REPOSITORY: 'docker-images'
+
+jobs:
+  setup-build-publish-deploy:
+    name: Publish
+    runs-on: 'ubuntu-latest'
+    environment: 'production'
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: Checkout
+        uses: "actions/checkout@v3"
+
+      - id: auth
+        uses: "google-github-actions/auth@v1"
+        with:
+          credentials_json: "${{ secrets.GOOGLE_APPLICATION_CREDENTIALS }}"
+
+      - name: Set up Cloud SDK
+        uses: "google-github-actions/setup-gcloud@v1"
+
+      - name: Use gcloud CLI
+        run: "gcloud info"
+
+      - name: Docker auth
+        run: |-
+          gcloud auth configure-docker ${{ env.LOCATION }}-docker.pkg.dev --quiet
+
+      - uses: dorny/paths-filter@v2
+        id: filter
+        with:
+          filters: |
+            stock_service:
+              - 'services/stock_service/**'
+
+      - name: Build image
+        if: steps.filter.outputs.stock_service == 'true'
+        run: docker build . --file services/stock_service/ --tag ${{ LOCATION }}-docker.pkg.dev/${{ PROJECT_ID }}/${{ REPOSITORY }}/stock_service:latest
+        working-directory: ../../
+
+      - name: Push image
+        run: docker push ${{ LOCATION }}-docker.pkg.dev/${{ PROJECT_ID }}/${{ REPOSITORY }}/stock_service:latest
