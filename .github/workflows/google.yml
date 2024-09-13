@@ -3,7 +3,7 @@ name: 'Build and Deploy to GKE'
 on:
   push:
     branches:
-      - '"master"'
+      - master
 
 env:
   PROJECT_ID: 'spiritual-oxide-435516-u4'
