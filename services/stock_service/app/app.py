@@ -11,5 +11,6 @@ app = FastAPI()
             include_in_schema=False
 )
 def get_data(request: Request):
-    
+
+    print(request.headers)
     return "OK"
