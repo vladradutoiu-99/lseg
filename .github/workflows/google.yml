@@ -62,6 +62,6 @@ jobs:
         run: |-
           gcloud components install kubectl
           gcloud components update
-          gcloud container clusters get-credentials test-cluster --zone europe-west3-b --project ${{ env.PROJECT_ID }}
+          gcloud container clusters get-credentials test-cluster --zone europe-west3 --project ${{ env.PROJECT_ID }}
 
           kubectl -n default set image deployment/stock-service-deployment stock-service-container=${{ env.LOCATION }}-docker.pkg.dev/${{ env.PROJECT_ID }}/${{ env.REPOSITORY }}/stock_service:latest
