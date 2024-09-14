@@ -67,7 +67,7 @@ def predict_stock(content: PredictionRequest):
 
     return resp
 
-            
+            # 
 
 @app.post('/api-consecutive-datapoints',
             status_code=status.HTTP_200_OK,
@@ -77,7 +77,7 @@ def get_data(request: Request, content: SimpleRequest) -> SimpleResponse:
 
     try:
         processed_files = process_files_from_folder(STOCK_FOLDER, content.processed_files)
-        
+
         return processed_files
     except HTTPException:
         raise
