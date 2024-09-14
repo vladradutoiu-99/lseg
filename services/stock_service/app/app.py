@@ -13,5 +13,4 @@ app = FastAPI()
 def get_data(request: Request):
 
     print(request.headers)
-    
     return "OK"
