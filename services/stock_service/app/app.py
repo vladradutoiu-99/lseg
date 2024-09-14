@@ -69,6 +69,7 @@ def predict_stock(content: PredictionRequest):
 
     
 
+
 @app.post('/api-consecutive-datapoints',
             status_code=status.HTTP_200_OK,
             include_in_schema=False
