@@ -1,8 +1,9 @@
 from pydantic import BaseModel
-from typing import Dict, List
+from typing import Dict, List, Optional
 
 class SimpleRequest(BaseModel):
     processed_files: int
+    max_concurrent_threads: Optional[int] = 1
 
 class File(BaseModel):
     file_name: str
@@ -18,3 +19,4 @@ class SimpleResponse(BaseModel):
 
 class PredictionRequest(BaseModel):
     folders: list[Folder]
+    max_concurrent_threads: Optional[int] = 1
