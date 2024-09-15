@@ -256,6 +256,7 @@ resource "kubernetes_manifest" "postgresql_postgres_ns_postgresql_cluster" {
     "spec" = {
       "databases" = {
         "mydatabase" = "mydatabaseowner"
+        "defaultdatabase" = "default.myuser"
       }
       "dockerImage" = "ghcr.io/zalando/spilo-15:3.0-p1"
       "enableShmVolume" = true
@@ -468,6 +469,18 @@ resource "kubernetes_deployment_v1" "deployment" {
               name = "default.myuser.postgresql-cluster.credentials.postgresql.acid.zalan.do"
             }
           }
+
+          resources {
+            limits = {
+              cpu    = "2500m"
+              memory = "512Mi"
+            }
+            requests = {
+              cpu    = "2000m"
+              memory = "256Mi"
+            }
+          }
+          
         }
 
         security_context {

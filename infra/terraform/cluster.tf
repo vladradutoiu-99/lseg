@@ -110,7 +110,7 @@ resource "google_container_node_pool" "standard_pool" {
     ]
     disk_size_gb    = 20
     disk_type       = "pd-standard"
-    machine_type    = "e2-standard-2"
+    machine_type    = "e2-standard-4"
   }
 
   autoscaling {
