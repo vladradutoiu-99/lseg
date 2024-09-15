@@ -1,10 +1,12 @@
 from datetime import timedelta
 import pandas as pd
 
+# Pandas class used to process the csv files
 class PandasUtils:
     def __init__(self):
         self.pd = pd
 
+    # Function used to get the dataframe sorted from the csv files
     def get_data_from_file(self, file_path: str, columns: list = None):
         try:
             df = self.pd.read_csv(file_path, names=columns)
@@ -18,6 +20,7 @@ class PandasUtils:
         
     def get_n_values_from_random_timestamp(self, df: pd.DataFrame, n = 10):
         if df is not None:
+            # Get a random timestamp from the dataframe and use it as starting point for the next n (10) rows
             random_timestamp = df['TIMESTAMP'].sample().index[0]
 
             next_n_rows = df.iloc[random_timestamp:random_timestamp+n]
@@ -27,7 +30,7 @@ class PandasUtils:
             return next_n_rows
         
         return None
-        
+    # This function was not used in the final implementation 
     def get_columns(self, df: pd.DataFrame):
         return df.columns.tolist()
     
@@ -36,7 +39,7 @@ class PandasUtils:
         df['TIMESTAMP'] = pd.to_datetime(df['TIMESTAMP'], format='%d-%m-%Y', errors='coerce')
 
         return df
-    
+    # Implementation of the algorithm to predict the stock prices
     def predict_rows_in_df(self, df: pd.DataFrame):
         second_highest_price = sorted(df['PRICE'])[-2]
 

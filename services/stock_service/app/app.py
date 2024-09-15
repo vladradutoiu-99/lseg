@@ -9,7 +9,7 @@ from app.restschema import SimpleRequest, SimpleResponse, PredictionRequest
 from app.utils import process_files_from_folder, predict_stock
 
 STOCK_FOLDER = 'stock_price_data_files'
-
+# FastAPI is used as the framework to create the REST API
 app = FastAPI()
 
 @app.post('/api-consecutive-datapoints',

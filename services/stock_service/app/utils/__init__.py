@@ -39,6 +39,7 @@ def predict_stock_file(file: File, folder_name: str, zf: zipfile.ZipFile) -> Fil
     predicted_stock.to_csv(output_bytes, index=False)
     output_bytes.seek(0)
 
+    # Each file is addded to the archive here
     zf.writestr(predicted_file_path, output_bytes.read())
 
 def process_files_from_folder(folder_path: str, num_files: int, max_concurrent_threads: int = 1) -> SimpleResponse:
@@ -47,6 +48,7 @@ def process_files_from_folder(folder_path: str, num_files: int, max_concurrent_t
     response = SimpleResponse(folders=[])
 
     try:
+        # Threadpool is used to process files concurrently
         with concurrent.futures.ThreadPoolExecutor(max_workers=max_concurrent_threads) as executor:
             threads = []
             folders = os.listdir(folder_path)

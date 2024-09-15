@@ -10,6 +10,8 @@ Endpoint 1:
  processed_files represent the number of files to be selected from each folder. The files
  are stored locally on the Docker image. The files are read using pandas.
  If the number of files available is less than processed_files, all of them will be used.
+ I have assumed that the files do not have to be manually uploaded by api and could be served static or from cloud storage.
+ This helped speed up development.
 
  max_concurrent_threads represents the number of threads to be used while processing the files.
  Default is 1.
@@ -91,6 +93,8 @@ Endpoint 2:
  Optionally it has "max_concurrent_threads" as parameter to specify the number of threads to be used
 
  The algorithm used is the one provided in the challenge.
+ For further development, an ARMA model could be used: 
+ https://www.deanfrancispress.com/index.php/te/article/view/883/TE001192.pdf
 
  Returns a zip file containing the files structured in folders.
 
@@ -109,4 +113,11 @@ Endpoint 2:
  It does not have any vertical or horizontal scaling strategies.
  It does not have any event-driven actions.
  The logging does not use any from ELK stack or Grafana, Prometheus.
+
+ Credits:
+ The implementation of zalando-postgres was helped by google documentation: 
+ https://cloud.google.com/kubernetes-engine/docs/tutorials/stateful-workloads/postgresql
+ Everything else was created using previous knowledge and libraries documentation.
+
+
 
