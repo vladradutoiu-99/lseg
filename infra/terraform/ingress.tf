@@ -21,7 +21,7 @@ resource "kubernetes_manifest" "kong_rate_limiting_plugin" {
     }
     "plugin" = "rate-limiting"
     "config" = {
-      "minute" = 5
+      "minute" = 30
       "policy" = "local"
       "path" = "/stock-service"
       "limit_by" = "path"
