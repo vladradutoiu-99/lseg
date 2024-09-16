@@ -15,6 +15,7 @@ Endpoint 1:
 
  max_concurrent_threads represents the number of threads to be used while processing the files.
  Default is 1.
+ The machine running the server has 2 vCpu, 2 threads can be used at most.
 
  Returns a Dictionary with field "folders" with fields "folder_name" and "files"
  Files represents a list of dictionaries with fields "file_name" and "random_rows"

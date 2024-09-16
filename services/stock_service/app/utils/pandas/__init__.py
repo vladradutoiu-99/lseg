@@ -3,13 +3,10 @@ import pandas as pd
 
 # Pandas class used to process the csv files
 class PandasUtils:
-    def __init__(self):
-        self.pd = pd
-
     # Function used to get the dataframe sorted from the csv files
     def get_data_from_file(self, file_path: str, columns: list = None):
         try:
-            df = self.pd.read_csv(file_path, names=columns)
+            df = pd.read_csv(file_path, names=columns)
             df['TIMESTAMP'] = pd.to_datetime(df['TIMESTAMP'], format='%d-%m-%Y', errors='coerce')
             df.sort_values(by=['TIMESTAMP'], inplace=True)
 
@@ -35,7 +32,7 @@ class PandasUtils:
         return df.columns.tolist()
     
     def get_stock_df_from_list(self, data: list):
-        df = self.pd.DataFrame(data)
+        df = pd.DataFrame(data)
         df['TIMESTAMP'] = pd.to_datetime(df['TIMESTAMP'], format='%d-%m-%Y', errors='coerce')
 
         return df
