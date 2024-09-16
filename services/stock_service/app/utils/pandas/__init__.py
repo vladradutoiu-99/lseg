@@ -1,3 +1,4 @@
+import logging
 from datetime import timedelta
 import pandas as pd
 
@@ -12,7 +13,7 @@ class PandasUtils:
 
             return df
         except Exception as e:
-            print(f"Error reading file: {e}")
+            logging.error(f"Error reading file: {e}")
             return None
         
     def get_n_values_from_random_timestamp(self, df: pd.DataFrame, n = 10):
@@ -40,7 +41,7 @@ class PandasUtils:
     def predict_rows_in_df(self, df: pd.DataFrame):
         second_highest_price = sorted(df['PRICE'])[-2]
 
-        print(f"Second highest price: {second_highest_price}")
+        logging.debug(f"Second highest price: {second_highest_price}")
 
         last_price = df['PRICE'].iloc[-1]
         second_predicted = second_highest_price +  (last_price - second_highest_price) / 2

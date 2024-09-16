@@ -1,6 +1,7 @@
 import os
 import io
 import zipfile
+import logging
 
 import concurrent.futures
 
@@ -61,7 +62,7 @@ def process_files_from_folder(folder_path: str, num_files: int, max_concurrent_t
                 try:
                     t.result()
                 except Exception as e:
-                    print(f"Error processing files: {e}")
+                    logging.error(f"Error processing files: {e}")
                     raise ValueError(f"Error processing files: {e}")
     except Exception as e:
         raise
@@ -86,7 +87,7 @@ def predict_stock(content: PredictionRequest) -> bytes:
                 try:
                     t.result()
                 except Exception as e:
-                    print(f"Error predicting stock prices: {e}")
+                    logging.error(f"Error predicting stock prices: {e}")
                     raise ValueError(f"Error predicting stock prices: {e}")
     except Exception as e:
         raise
