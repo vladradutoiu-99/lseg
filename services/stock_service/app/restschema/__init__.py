@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 from typing import Dict, List, Optional
 
-class SimpleRequest(BaseModel):
+class ConsecutiveDatapointsRequest(BaseModel):
     processed_files: int
     max_concurrent_threads: Optional[int] = 1
 
@@ -13,7 +13,7 @@ class Folder(BaseModel):
     folder_name: str
     files: list[File]
 
-class SimpleResponse(BaseModel):
+class ConsecutiveDatapointsResponse(BaseModel):
     folders: list[Folder]
 
 

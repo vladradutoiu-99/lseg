@@ -4,7 +4,7 @@ The project consists of a small application with 2 API endpoints.
 The API endpoints are accessible at http://34.107.33.105 and have a rate limit of 30 requests per minute. The limit is shared between the 2 endpoints
 
 Endpoint 1:
- - '/stock-service/api-consecutive-datapoints', uses POST method and takes 2 paramters
+ - '/stock-service/consecutive-datapoints', uses POST method and takes 2 paramters
  "processed_files": int, "max_concurrent_threads": Optional[int]
 
  processed_files represent the number of files to be selected from each folder. The files
@@ -88,7 +88,7 @@ Endpoint 1:
 }
 
 Endpoint 2:
- - - '/stock-service/api-predict-stock-price', uses POST method
+ - - '/stock-service/predict-stock-price', uses POST method
  It takes the first endpoint output as parameter
  Optionally it has "max_concurrent_threads" as parameter to specify the number of threads to be used
 
